@@ -1,7 +1,10 @@
 package com.gulukal.mapper;
 
 
+<<<<<<< HEAD
 import com.gulukal.dto.request.DoLoginRequestDto;
+=======
+>>>>>>> Master/master
 import com.gulukal.dto.request.RegisterRequestDto;
 import com.gulukal.repository.entity.User;
 import org.mapstruct.Mapper;
@@ -19,6 +22,9 @@ public interface UserMapper {
     @Mapping(source = "sifre",target = "password")
     User toUser(RegisterRequestDto dto);
 
+<<<<<<< HEAD
     //parametreler ayni oldugu icin map yapmaya gerek yok
     DoLoginRequestDto toDoLoginRequestDto(User user);
+=======
+>>>>>>> Master/master
 }

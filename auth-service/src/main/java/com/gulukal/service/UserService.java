@@ -1,8 +1,5 @@
 package com.gulukal.service;
 
-import com.gulukal.dto.request.DoLoginRequestDto;
-import com.gulukal.dto.request.RegisterRequestDto;
-import com.gulukal.mapper.UserMapper;
 import com.gulukal.repository.entity.IUserRepository;
 import com.gulukal.repository.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +8,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
-
 @Service
 public class UserService {
 
     @Autowired
     IUserRepository iUserRepository;
 
-    @Autowired
-    UserMapper  userMapper;
+    /**
+     * Kullanıcıyı kayıt eder ve kayıtedilen kullanıcının id bilgisi alınarak geri döndürülür.
+     * @param user
+     * @return
+     */
 
-
-//    /**
-//     * Kullanıcıyı kayıt eder ve kayıtedilen kullanıcının id bilgisi alınarak geri döndürülür.
-//     * @param dto
-//     * @return
-//     */
-    public User saveReturnUser(RegisterRequestDto dto){
-        User user = userMapper.toUser(dto);
+    public User saveReturnUser(User user){
         iUserRepository.save(user);
         return user;
     }
@@ -50,12 +41,8 @@ public class UserService {
         return iUserRepository.findAll();
     }
 
-    public DoLoginRequestDto findByUsernameAndPassword(DoLoginRequestDto dto){
-        Optional <User> user = iUserRepository.findByUsernameAndPassword(dto.getUsername(), dto.getPassword());
-        if(user.isPresent())
-            return userMapper.toDoLoginRequestDto(user.get());
-            return new DoLoginRequestDto();
-
+    public Optional<User> findByUsernameAndPassword(String username,String password){
+        return iUserRepository.findByUsernameAndPassword(username, password);
     }
 
     public boolean isUser(String username,String password){
