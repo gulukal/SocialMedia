@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Data
 @Builder
+
 public class RegisterRequestDto {
 
     @NotNull

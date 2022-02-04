@@ -1,5 +1,7 @@
 package com.gulukal.service;
 
+import com.gulukal.dto.request.RegisterRequestDto;
+import com.gulukal.mapper.UserMapper;
 import com.gulukal.repository.entity.IUserRepository;
 import com.gulukal.repository.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,19 +10,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @Service
 public class UserService {
 
     @Autowired
     IUserRepository iUserRepository;
 
-    /**
-     * Kullanıcıyı kayıt eder ve kayıtedilen kullanıcının id bilgisi alınarak geri döndürülür.
-     * @param user
-     * @return
-     */
+    @Autowired
+    UserMapper  userMapper;
 
-    public User saveReturnUser(User user){
+
+//    /**
+//     * Kullanıcıyı kayıt eder ve kayıtedilen kullanıcının id bilgisi alınarak geri döndürülür.
+//     * @param dto
+//     * @return
+//     */
+    public User saveReturnUser(RegisterRequestDto dto){
+        User user = userMapper.toUser(dto);
         iUserRepository.save(user);
         return user;
     }
