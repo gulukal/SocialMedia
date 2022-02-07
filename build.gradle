@@ -41,6 +41,7 @@ allprojects {
         implementation  libs.openapi
         implementation  libs.mapstruct
         annotationProcessor  libs.mapstructProcessor
+        implementation  libs.springOpenFeign
     }
 }
 configurations {
