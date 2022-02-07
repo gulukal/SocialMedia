@@ -1,9 +1,10 @@
 package com.gulukal.controller;
 
+
+import static com.gulukal.constant.RestApiUrls.*;
 import com.gulukal.dto.request.DoLoginRequestDto;
 import com.gulukal.dto.request.RegisterRequestDto;
 import com.gulukal.dto.response.DoLoginResponseDto;
-import com.gulukal.mapper.UserMapper;
 import com.gulukal.repository.entity.User;
 import com.gulukal.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,7 +16,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping(VERSION+USER)
+//@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -26,13 +28,13 @@ public class UserController {
     // -> returnCode-> error->9XXX -> 9001-> username and password error
     // -> success-> 1XXX -> 1000, 1100
     // Burada validasyon yapılmalı.
-    @PostMapping("/dologin")
+    @PostMapping(DOLOGIN)
     @Operation(summary = "Kullanıcı girişi için kullanılacak metod")
     public ResponseEntity<DoLoginResponseDto> doLogin(@RequestBody @Valid DoLoginRequestDto dto){
         return ResponseEntity.ok(userService.findByUsernameAndPassword(dto));
     }
 
-    @PostMapping("/register")
+    @PostMapping(REGISTER)
     public ResponseEntity<Void> register(@RequestBody @Valid RegisterRequestDto dto){
         // 1. Etapta-> Auth içni kayıt olmalı
         userService.saveReturnUser(dto);
@@ -40,7 +42,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/findall")
+    @GetMapping(FINDALL)
     public ResponseEntity<List<User>> findAll(){
         return ResponseEntity.ok(userService.findAll());
     }

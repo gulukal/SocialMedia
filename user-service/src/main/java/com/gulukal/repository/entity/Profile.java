@@ -17,6 +17,7 @@ import java.util.List;
 @Document
 public class Profile implements Serializable {
     @Id
+    //soz konusu string olunca id ye string verilir ve asla girilmez
     String id;
     long authid;
     String firstname;
